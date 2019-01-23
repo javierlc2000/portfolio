@@ -45,7 +45,7 @@ function draw() {
 			randpoint[0] = (randpoint[0] + points[d][0])/2; 
 			randpoint[1] = (randpoint[1] + points[d][1])/2; 
 
-			ellipse(randpoint[0], randpoint[1], 0.1, 0.1);
+			ellipse(randpoint[0], randpoint[1], 0.05, 0.05);
 		}
 	}
 }

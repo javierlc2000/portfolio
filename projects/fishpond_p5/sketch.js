@@ -3,9 +3,9 @@ fish = [];
 food = [];
 
 maxrad = 15;
-maxvel = 2;
-maxacc = 1.5;
-maxlon = 50;
+maxvel = 4;
+maxacc = 2;
+maxlon = 20;
 
 function setup() {
     createCanvas(500, 500);

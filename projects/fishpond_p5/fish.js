@@ -64,7 +64,6 @@ function Fish(mvel, macc, mrad, mlon, mid) {
         fill(255);
         var len = this.tail.length;
         for(var i=0; i<len; i++) {
-            if(i%2 || i%3) continue;
             ellipse(this.tail[i][0], this.tail[i][1], 
                 this.radius*i/len, this.radius*i/len);
         }

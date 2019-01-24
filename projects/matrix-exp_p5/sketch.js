@@ -40,17 +40,20 @@ function mouseClicked() {
 	if(	width-2-30 <= mouseX && mouseX < width-2 &&
 		height-2-30 <= mouseY && mouseY < height-2) {
 
-		mat_size++;
-
-		setup();	
+		if (drawing) {
+			mat_size++;
+			setup();	
+		}
 	}
 	else if( width-2-60 <= mouseX && mouseX < width-2-30 &&
 		height-2-30 <= mouseY && mouseY < height-2) {
 		
-		mat_size--;
-		if (mat_size < 1) mat_size = 1;
+		if (drawing) {
+			mat_size--;
+			if (mat_size < 1) mat_size = 1;
 
-		setup();	
+			setup();	
+		}
 	}
 	else if(0 <= mouseX && mouseX < 30 &&
 	    height-2-30 <= mouseY && mouseY < height-2) {
@@ -62,9 +65,20 @@ function mouseClicked() {
 		} 	
 		else {
 			drawing = true;
-			setup();
+
+			background(225);
+			drawButtons();
+			drawMatrix();
+			
 			frameRate(0);
 		}	
+	}
+	else if(30 <= mouseX && mouseX < 60 &&
+	    height-2-30 <= mouseY && mouseY < height-2) {
+		
+		if (drawing) {
+			setup();
+		} 	
 	}
 	else {
 		for (var i=0; i<mat_size; ++i) {
@@ -73,11 +87,10 @@ function mouseClicked() {
 				if( i*sq_size + mat_offset <= mouseX && mouseX < (i+1)*sq_size + mat_offset &&
 					j*sq_size + mat_offset <= mouseY && mouseY < (j+1)*sq_size + mat_offset) {
 					
-					drawing = true;
-					frameRate(0);
-
-					if(keyIsPressed && keyCode == SHIFT) matrix[i][j]--;				
-					else matrix[i][j]++;
+					if (drawing) {
+						if(keyIsPressed && keyCode == SHIFT) matrix[i][j]--;				
+						else matrix[i][j]++;
+					}
 				}					
 			}
 		}
@@ -86,24 +99,25 @@ function mouseClicked() {
 }
 
 function drawButtons() {
-	stroke(0);
-	fill(0,255,0);
-	rect(width-2, height-2, -30, -30);
-	fill(0);
-	noStroke();
-	textSize(20);
-	text("+", width-2-20, height-2-10);
 
-	stroke(0);
-	fill(255,0,0);
-	rect(width-2-30, height-2, -30, -30);
-	fill(0);
-	noStroke();
-	textSize(20);
-	text("-", width-2-50, height-2-10);
-
-	stroke(0);
 	if (drawing) {
+		stroke(0);
+		fill(0,255,0);
+		rect(width-2, height-2, -30, -30);
+		fill(0);
+		noStroke();
+		textSize(20);
+		text("+", width-2-20, height-2-10);
+
+		stroke(0);
+		fill(255,0,0);
+		rect(width-2-30, height-2, -30, -30);
+		fill(0);
+		noStroke();
+		textSize(20);
+		text("-", width-2-50, height-2-10);
+
+		stroke(0);
 		fill(0,255, 0);
 		rect(0, height-2, 30, -30);
 	
@@ -113,9 +127,20 @@ function drawButtons() {
 		text("^", 10, height-2-9);
 		textSize(15);
 		text("|", 11.4, height-2-10);
-
+		
+		fill(255,0, 0);
+		stroke(0);
+		rect(30, height-2, 30, -30);
+	
+		fill(0);
+		noStroke();
+		textStyle(BOLD);
+		textSize(20);
+		text(char(0x25A0), 40, height-2-8);
+		textStyle(NORMAL);
 	}
 	else{
+		stroke(0);
 		fill(255, 0, 0);
 		rect(0, height-2, 30, -30);
 	
@@ -125,8 +150,7 @@ function drawButtons() {
 		
 		text("X", 12, height-2-9);
 		
-		text(frameCountEvol, 40, height-2-9)
-		
+		text("^"+frameCountEvol, 45, height-2-9)	
 	}
 }
 

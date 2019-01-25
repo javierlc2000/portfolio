@@ -61,7 +61,7 @@ function mouseClicked() {
 		if (drawing) {
 			drawing = false;
 			original_matrix = matrix;
-			frameRate(frameRateEvol);
+			frameRate(frameRateEvl);
 		} 	
 		else {
 			drawing = true;

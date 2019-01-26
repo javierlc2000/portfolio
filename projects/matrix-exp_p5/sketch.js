@@ -1,6 +1,5 @@
 var mat_offset = 50; // final value
 var color_strength = 20; // final value
-var frameRateEvol = 10; // final value
 var INF = 10000; // final value
 
 var mat_size = 3;
@@ -10,6 +9,7 @@ var sq_size = 0;
 
 var drawing = true;
 var frameCountEvol = 0;
+var frameRateEvol = 5;
 
 function setup() {
 	createCanvas(500, 500);
@@ -61,7 +61,7 @@ function mouseClicked() {
 		if (drawing) {
 			drawing = false;
 			original_matrix = matrix;
-			frameRate(frameRateEvl);
+			frameRate(frameRateEvol);
 		} 	
 		else {
 			drawing = true;

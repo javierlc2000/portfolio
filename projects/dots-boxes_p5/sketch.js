@@ -5,9 +5,17 @@ var table = Array(7).fill().map(() => Array(7).fill(0));
 var p1 = 0;
 var p2 = 0;
 
+var finished = true;
+
 function setup() {
 	createCanvas(500, 500);
 	background(225);
+
+	table = Array(7).fill().map(() => Array(7).fill(0));
+	p1 = 0;
+	p2 = 0;
+	frameRate(60);
+
 	play();
 }
 
@@ -56,7 +64,7 @@ function draw() {
 				var jpad = floor((j+1)/2);
 			
 				if (table[i][j] == 0) {
-					if (ipad*sq_size+padd-2.5 <= mouseX && mouseX < ipad*sq_size+padd+2.5 &&
+					if (ipad*sq_size+padd-20.5 <= mouseX && mouseX < ipad*sq_size+padd+20.5 &&
 					 	(jpad-1)*sq_size+padd <= mouseY && mouseY < jpad*sq_size+padd) {
 						stroke(255,0,0);
 					}
@@ -75,7 +83,7 @@ function draw() {
 		
 				if (table[i][j] == 0) {
 					if ((ipad-1)*sq_size+padd <= mouseX && mouseX < ipad*sq_size+padd &&
-					 	jpad*sq_size+padd-2.5 <= mouseY && mouseY < jpad*sq_size+padd+2.5) {
+					 	jpad*sq_size+padd-20.5 <= mouseY && mouseY < jpad*sq_size+padd+20.5) {
 						stroke(255,0,0);
 					}
 					else stroke(200);
@@ -100,6 +108,13 @@ function draw() {
 	}
 }
 
+function keyPressed() {
+	if (finished) {
+		finished = false;
+		setup();
+	}
+}
+
 function mouseClicked() {
 	for (var i=0; i<7; i++) {
 		for (var j=0; j<7; j++) {
@@ -112,7 +127,7 @@ function mouseClicked() {
 				var jpad = floor((j+1)/2);
 			
 				if (table[i][j] == 0) {
-					if (ipad*sq_size+padd-2.5 <= mouseX && mouseX < ipad*sq_size+padd+2.5 &&
+					if (ipad*sq_size+padd-20.5 <= mouseX && mouseX < ipad*sq_size+padd+20.5 &&
 					 	(jpad-1)*sq_size+padd <= mouseY && mouseY < jpad*sq_size+padd) {
 						
 						table[i][j] = 2;
@@ -127,7 +142,7 @@ function mouseClicked() {
 		
 				if (table[i][j] == 0) {
 					if ((ipad-1)*sq_size+padd <= mouseX && mouseX < ipad*sq_size+padd &&
-					 	jpad*sq_size+padd-2.5 <= mouseY && mouseY < jpad*sq_size+padd+2.5) {
+					 	jpad*sq_size+padd-20.5 <= mouseY && mouseY < jpad*sq_size+padd+20.5) {
 					
 
 						table[i][j] = 2;
@@ -160,14 +175,24 @@ function checkFaces(p) {
 			}
 		}
 	}
-	if (p == 1) {
-		if (fet) {
-			play();
+	
+	finished = true;
+	for (var i=1; i<7; i+=2) {
+		for (var j=1; j<7; j+=2) {
+			if (table[i][j] == 0) finished = false;
 		}
 	}
-	else {
-		if (!fet) {
-			play();
+
+	if (!finished) {
+		if (p == 1) {
+			if (fet) {
+				play();
+			}
+		}
+		else {
+			if (!fet) {
+				play();
+			}
 		}
 	}
 }

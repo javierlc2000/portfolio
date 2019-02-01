@@ -1,6 +1,6 @@
 var ncir = 11;
-var radius = 2*500/ncir/6;
-var padd = 1*500/ncir/6;
+var radius = 4*500/ncir/5/2;
+var padd = 1*500/ncir/5/2;
 var square = radius + padd;
 
 var cirL = [];
@@ -26,25 +26,30 @@ function draw() {
     noStroke();
     rect(0, height - 2*(radius+padd), width, height);
     rect(0, 0, 2*(radius+padd), height);
+    
+    
     for (var i=0; i+1<ncir; i++) { 
+        
         noFill();
         stroke(0);
         ellipse(cirL[i][0], cirL[i][1], 2*radius)
         ellipse(cirD[i][0], cirD[i][1], 2*radius)
-
+        
+        noStroke();
         fill(0);
         var pos1 = speeds[i]*frameCount+Math.PI/2;
         var pos2 = -speeds[i]*frameCount+2*Math.PI/2;
         ellipse(cirL[i][0] + radius*sin(pos1),
-                    cirL[i][1] + radius*cos(pos1), radius/5)
+                    cirL[i][1] + radius*cos(pos1), radius/5);
         ellipse(cirD[i][0] + radius*sin(pos2),
-                    cirD[i][1] + radius*cos(pos2), radius/5)
+                    cirD[i][1] + radius*cos(pos2), radius/5);
+    
         for (var j=0; j+1<ncir; j++) {
 
             var pos1 = speeds[i]*frameCount+Math.PI/2;
             var pos2 = -speeds[j]*frameCount+2*Math.PI/2;
             ellipse(cirD[j][0] + radius*sin(pos2),
-               cirL[i][1] + radius*cos(pos1), 0.1);     
+               cirL[i][1] + radius*cos(pos1), 0.5);     
         }
     }
 
